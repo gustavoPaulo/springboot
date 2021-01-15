@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Spring Framework - Novo Usuário</title>
+	
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.aw-link-panel{
+	
+	float: right;
+	padding: 0px;
+}
+.navbar-brand{
+	
+	padding-top: 10px;
+	align-items: flex-end;
+}
+
+.panel-default{
+	
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.aw-titulo-panel{
+	
+	float: left;
+	padding-top: 2px;
+  }
+</style>
+
+</head>
+<head th:replace="/templateSistema :: titulo">
+</head>
+<body>
+
+	<div th:replace="/templateSistema :: barraBody"></div>
+	
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	
+	<div th:fragment="mensagemErro">
+		<div class="alert alert-danger" th:if="${!#strings.isEmpty(error)}">
+			<div th:each="detailedError : ${error}">
+				<span th:text="${detailedError}">Ops... Algo deu errado!!!</span>
+			</div>
+		</div>
+	</div>
+	
+
+	<form class="form-horizontal col-sm-offset-4 col-sm-4" action="/criarUsuario" method="post" onsubmit="return validarLogin() ? true : false;">
+
+		<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			<span th:text="${mensagem}">Pessoa salva com sucesso!!!</span>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title aw-titulo-panel">Novo Usuário</h1>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				<div class="form-group">
+					<label for="email" class="col-sm-3 control-label">E-mail</label>
+					<div class="col-sm-7">
+						<input type="email" class="form-control" id="email" name="email" autofocus="autofocus"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="login" class="col-sm-3 control-label">Login</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" id="login" name="login"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="senha" class="col-sm-3 control-label">Senha</label>
+					<div class="col-sm-7">
+					<div class="input-group">
+						<input type="password" class="form-control" id="senha" name="senha"/>
+						<span class="input-group-btn">
+								<button type="button" class="btn btn-default" id="olho" onclick="mostrarSenha()">
+									<i class="glyphicon glyphicon-eye-open"></i>
+								</button>
+						</span>
+					</div>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="confirmarSenha" class="col-sm-3 control-label">Confirmar</label>
+					<div class="col-sm-7">
+						<input type="password" class="form-control" id="confirmarSenha" name="confirmarSenha"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="role_id" class="col-sm-3 control-label">Tipo</label>
+					<div class="col-sm-7">
+						<select class="form-control" id="role_id" name="role_id">
+							<option value="2">Padrão</option>
+							<option value="1">Admin</option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-7">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Criar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+   <div class="footer">
+      	<h5>Spring Framework © 2020 v 1.28 - 
+       		<a class="btn btn-link btn-xs" title="Viste meu portfólio" rel="tooltip" data-placement="top"
+       			onclick="window.open('https://portfoliojava.herokuapp.com')">portfoliojava.herokuapp.com
+       		</a>
+      	</h5>
+   </div>
+
+</body>
+
+<script type="text/javascript">
+$(function(){
+	
+	$('[rel="tooltip"]').tooltip();
+	
+});
+
+function validarLogin() {
+	if(document.getElementById("email").value == ''){
+		alert('Informe o E-mail!');
+		return false;	
+	}
+	if(document.getElementById("login").value == ''){
+		alert('Informe o Login!');
+		return false;	
+	}
+	else if(document.getElementById("senha").value == ''){
+		alert('Informe a Senha!');
+		return false;
+	}
+	else if(document.getElementById("confirmarSenha").value != document.getElementById("senha").value){
+		alert('As senhas digitadas devem ser iguais!');
+		return false;
+	}
+	
+	return true;
+}
+
+function mostrarSenha(){
+	
+	var senha = $('#senha');
+	var olho= $("#olho");
+
+	olho.mousedown(function() {
+	  senha.attr("type", "text");
+	});
+
+	olho.mouseup(function() {
+	  senha.attr("type", "password");
+	});
+
+	$( "#olho" ).mouseout(function() { 
+	  $("#senha").attr("type", "password");
+	});
+}
+</script>
+
+</html>

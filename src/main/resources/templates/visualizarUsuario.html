@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Spring Framework - Usuários</title>
+</head>
+<head th:replace="/templateSistema :: titulo">
+</head>
+<body>
+
+	<div th:replace="/templateSistema :: barraBody"></div>
+	
+	
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			<span th:text="${mensagem}">Usuário excluido com sucesso!!!</span>
+		</div>
+		
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title aw-titulo-panel">Pesquisa de usuários</h1>
+			</div>
+		</div>
+
+		<div class="panel-body">
+
+			<form method="post" class="form-horizontal" th:action="@{/pesquisarUsuario}" th:object="${usuarioObj}" id="pesquisarUsuario">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="nomePesquisa" id="nomePesquisa" class="form-control" 
+							placeholder="Qual usuário está procurando?" autofocus="autofocus"/>
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+				</div>
+			</form>
+	
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">Código</th>
+							<th class="text-center">Login</th>
+							<th class="text-center">Senha</th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuarioModel : ${usuarios}">
+							<td class="text-center" th:text="${usuarioModel.id}"></td>
+							<td class="text-center" th:text="${usuarioModel.login}"></td>
+							<td class="text-center" th:text="(${usuarioModel.senha} ? '*********' : 'Sem senha')"></td>
+							<td class="text-center">
+								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalUsuario"
+									th:attr="data-id=${usuarioModel.id}, data-login=${usuarioModel.login}"
+									title="Excluir" rel="tooltip" data-placement="top">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="6" th:if="${#lists.isEmpty(usuarios)}">Nenhum usuário foi encontrado.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">Código</th>
+							<th class="text-center">Permissão</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuariosRole : ${permissoes}">
+							<td class="text-center" th:text="${usuariosRole.usuario_id}"></td>
+							<td class="text-center" th:text="(${usuariosRole.role_id} == 1 ? 'Admin' : 'Padrão')"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+		
+		<div class="modal fade" id="confirmacaoExclusaoModalUsuario" tabindex="-1" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+
+			<form th:attr="data-url-base=@{/excluirUsuario}">
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Você tem certeza?</h4>
+					</div>
+					
+					<div class="modal-body">
+						<span>Você deseja mesmo excluir esse usuário?</span>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-primary">Excluir</button>
+					</div>
+					
+				</div>
+			</form>
+			</div>
+		</div>
+		
+<div th:replace="/templateSistema :: scriptBody"></div>
+
+<div th:replace="/templateSistema :: rodapePagina"></div>
+
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Spring Framework - Telefone</title>
+</head>
+<head th:replace="/templateSistema :: titulo">
+</head>
+<body>
+
+	<div th:replace="/templateSistema :: barraBody"></div>
+
+
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			<span th:text="${mensagem}">Telefone salvo com sucesso!!!</span>
+		</div>
+		
+	<div th:replace="/templateSistema :: mensagemErro"></div>
+	
+	
+	<form class="form-horizontal" action="" method="post" th:object="${pessoaObj}">
+
+		<input id="id" name="id" type="hidden" th:field="*{id}"/>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title aw-titulo-panel">Detalhes</h1>
+				</div>
+			</div>
+
+			<div class="panel-body">
+				
+				<div class="form-group">
+					<label for="id" class="col-sm-2 control-label">Código</label>
+					<div class="col-sm-1">
+						<input type="text" class="form-control" id="id" name="id" th:field="*{id}" readonly="readonly" />
+					</div>
+					
+					<label for="cep" class="col-sm-3 control-label">CEP</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="cep" name="cep" th:field="*{cep}" readonly="readonly"/>
+					</div>
+					
+					<label for="profissao" class="col-sm-2 control-label">Profissão</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="profissao" name="profissao" th:field="*{profissao.nome}" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="nome" class="col-sm-2 control-label">Nome</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="nome" name="nome" th:field="*{nome}" readonly="readonly"/>
+					</div>
+					
+					<label for="logradouro" class="col-sm-2 control-label">Logradouro</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="logradouro" name="logradouro" th:field="*{logradouro}" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="sobrenome" class="col-sm-2 control-label">Sobrenome</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="sobrenome" name="sobrenome" th:field="*{sobrenome}" readonly="readonly"/>
+					</div>
+					
+					<label for="bairro" class="col-sm-2 control-label">Bairro</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="bairro" name="bairro" th:field="*{bairro}" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="dataNascimento" class="col-sm-2 control-label">Data de Nascimento</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="dataNascimento" name="dataNascimento" th:field="*{dataNascimento}"
+							   onkeypress="$(this).mask('00/00/0000')" data-date-format="dd/mm/yyyy" data-date-language="pt-BR" readonly="readonly"/>
+					</div>
+					
+					<label for="cidade" class="col-sm-2 control-label">Cidade</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="cidade" name="cidade" th:field="*{cidade}" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="idade" class="col-sm-2 control-label">Idade</label>
+					<div class="col-sm-1">
+						<input type="number" class="form-control" id="idade" name="idade" th:field="*{idade}" readonly="readonly"/>
+					</div>
+					
+					<label for="uf" class="col-sm-3 control-label">Estado</label>
+					<div class="col-sm-1">
+						<input type="text" class="form-control" id="uf" name="uf" th:field="*{uf}" readonly="readonly"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="sexo" class="col-sm-2 control-label">Sexo</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="sexo" name="sexo" th:field="*{sexo.descricao}" readonly="readonly"/>
+					</div>
+					
+					<label for="email" class="col-sm-2 control-label">E-mail</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" id="email" name="email" th:field="*{email}" readonly="readonly"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	
+	
+	<form class="form-horizontal" method="post"
+		th:action="@{/addTelefonePessoa/{idPessoa}(idPessoa=${pessoaObj.id})}">
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title aw-titulo-panel">Cadastro de telefone</h1>
+				</div>
+			</div>
+
+			<div class="panel-body">
+			
+				<div class="form-group">
+					<label for="numero" class="col-sm-2 control-label">Número</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" onkeypress="$(this).mask('(00) 0000-00009')" 
+							   id="numero" name="numero"  autofocus="autofocus" placeholder="(00) 0000-0000"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="tipo" class="col-sm-2 control-label">Tipo</label>
+					<div class="col-sm-2">
+						<select class="form-control" name="tipo">
+							<option th:each="tipo: ${todosOsTiposTelefone}" th:value="${tipo}" th:text="${tipo.descricao}"></option>
+						</select>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<button type="submit" class="btn btn-primary">Salvar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+<form class="form-horizontal col-sm-4">
+	<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title aw-titulo-panel">Lista de telefones</h1>
+				</div>
+			</div>
+
+	<div class="panel-body">
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">Número</th>
+							<th class="text-center">Tipo</th>
+							<th class="col-md-1" sec:authorize="hasRole('ROLE_ADMIN')"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="telefoneModel : ${telefones}">
+							<td class="text-center" th:text="${telefoneModel.numero}"></td>
+							<td class="text-center" th:text="${telefoneModel.tipo.descricao}"></td>
+							<td class="text-center" sec:authorize="hasRole('ROLE_ADMIN')">
+								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalTelefone"
+									th:attr="data-id=${telefoneModel.id}, data-numero=${telefoneModel.numero}"
+									title="Excluir" rel="tooltip" data-placement="top">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+</form>
+	
+
+	<div class="modal fade" id="confirmacaoExclusaoModalTelefone" tabindex="-1" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+
+			<form th:attr="data-url-base=@{/excluirTelefone}">
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Você tem certeza?</h4>
+					</div>
+					
+					<div class="modal-body">
+						<span>Você deseja mesmo excluir esse telefone?</span>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-primary">Excluir</button>
+					</div>
+					
+				</div>
+			</form>
+			</div>
+		</div>
+
+
+<div th:replace="/templateSistema :: scriptBody"></div>
+
+</body>
+</html>

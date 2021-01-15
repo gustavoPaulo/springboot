@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Spring Framework - Home</title>
+</head>
+<head th:replace="/templateSistema :: titulo">
+</head>
+<body>
+
+	<div th:replace="/templateSistema :: barraBody"></div>
+	
+	
+	<div class="alert alert-success" th:if="${!#strings.isEmpty(mensagem)}">
+			<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			<span th:text="${mensagem}">Pessoa excluida com sucesso!!!</span>
+		</div>
+	
+	<div th:replace="/templateSistema :: mensagemErro"></div>
+
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<div class="clearfix">
+				<h1 class="panel-title aw-titulo-panel">Pesquisa de pessoas</h1>
+			</div>
+		</div>
+
+		<div class="panel-body">
+
+			<form method="post" class="form-horizontal" th:action="@{/pesquisar}" th:object="${pessoaObj}" id="pesquisar">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<div class="input-group">
+							<input name="nomePesquisa" id="nomePesquisa" class="form-control" 
+							placeholder="Qual pessoa está procurando?" autofocus="autofocus"
+							th:value="${nomePesquisa}"/>
+							<span class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</span>
+						</div>
+					</div>
+					
+					<div class="col-sm-2">
+						<select class="form-control" id="pesquisaSexo" name="pesquisaSexo">
+							<option value="">Todos</option>
+							<option value="MASCULINO">Masculino</option>
+							<option value="FEMININO">Feminino</option>
+							<option value="NAO_INFORMADO">Não informado</option>
+						</select>					
+					</div>
+					
+					<div class="col-sm-offset-4 col-sm-1">
+						<a data-placement="top" title="Baixar PDF" rel="tooltip">
+							<button type="submit" class="btn btn-default" 
+									onclick="document.getElementById('pesquisar').method = 'get'">
+									
+								<i class="glyphicon glyphicon-download-alt"></i>
+							</button>
+						</a>
+					</div>
+					
+					<div class="col-sm-1">
+						<a data-placement="top" title="Enviar pesquisa por E-mail. Selecione uma opção de sexo para ajudar no resultado." 
+							rel="tooltip" data-toggle="modal" data-target="#listaEnviarEmail">
+							<button type="submit" class="btn btn-primary">
+								<i class="glyphicon glyphicon-envelope"></i>
+							</button>
+							
+							<input type="text" id="enviarPara" name="enviarPara" hidden="true">
+						</a>
+					</div>
+					
+		<div class="modal fade" id="listaEnviarEmail" tabindex="-1" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Para quem deseja enviar o relatório?</h4>
+					</div>
+					
+					<div class="modal-body">
+						<label>Digite os e-mails separados por vírgula</label>
+						<br/>
+						<textarea id="listaEmailModal" name="listaEmailModal"></textarea>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+						<button onclick="setaListaEmail()" class="btn btn-primary">Enviar</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+
+				</div>
+			</form>
+
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="text-center">Código</th>
+							<th class="text-center">Nome</th>
+							<th class="text-center">Sobrenome</th>
+							<th class="text-center">Idade</th>
+							<th class="text-center">E-mail</th>
+							<th class="text-center">Currículo</th>
+							<th class="col-md-1"></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pessoaModel : ${pessoas.content}">
+							<td class="text-center" th:text="${pessoaModel.id}"></td>
+							<td class="text-center" th:text="${pessoaModel.nome}"></td>
+							<td class="text-center" th:text="${pessoaModel.sobrenome}"></td>
+							<td class="text-center" th:text="${pessoaModel.idade}"></td>
+							<td class="text-center" th:text="${pessoaModel.email}"></td>
+							<td class="text-center">
+								<a class="btn btn-link btn-xs" title="Baixar Currículo" rel="tooltip" data-placement="top"
+									th:if="${pessoaModel.curriculo != null}"
+									th:href="@{/baixarCurriculo/{idPessoa}(idPessoa=${pessoaModel.id})}">
+									<span class="glyphicon glyphicon-paperclip"></span>
+								</a>
+								<a class="btn btn-link btn-xs" title="Esta pessoa não possui um currículo." rel="tooltip" data-placement="top"
+									th:if="${pessoaModel.curriculo == null}">
+									<span class="glyphicon glyphicon-question-sign"></span>
+								</a>
+							</td>
+							<td class="text-center">
+								<a class="btn btn-link btn-xs" title="Editar" rel="tooltip" data-placement="top"
+									th:href="@{/editarPessoa/{idPessoa}(idPessoa=${pessoaModel.id})}">
+									<span class="glyphicon glyphicon-pencil"></span>
+								</a>
+								<a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModalPessoa"
+									th:attr="data-id=${pessoaModel.id}, data-nome=${pessoaModel.nome}"
+									title="Excluir" rel="tooltip" data-placement="top" sec:authorize="hasRole('ROLE_ADMIN')">
+									<span class="glyphicon glyphicon-remove"></span>
+								</a>
+								<a class="btn btn-link btn-xs" title="Telefone e detalhes" rel="tooltip" data-placement="top" 
+									th:href="@{/telefonePessoa/{idPessoa}(idPessoa=${pessoaModel.id})}">
+									<span class="glyphicon glyphicon-earphone"></span>
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="7" th:if="${#lists.isEmpty(pessoas.content)}">Nenhuma pessoa foi encontrada.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div class="form-group">
+				<div class="text-center">
+					<a th:href="@{/pessoaPagina(page=${pessoas.number-1}, size=${pessoas.size}, nomePesquisa=${nomePesquisa}, pesquisaSexo=${pesquisaSexo})}"
+						data-placement="top" title="Anterior" rel="tooltip">
+						<span class="glyphicon glyphicon-chevron-left" th:if="${pessoas.hasPrevious()}"></span>
+					</a>					
+					
+					<th:block th:each="i: ${#numbers.sequence(0, pessoas.totalPages - 1)}">
+						<a th:href="@{/pessoaPagina(page=${i}, size=${pessoas.size}, nomePesquisa=${nomePesquisa}, pesquisaSexo=${pesquisaSexo})}">[[ ${i} + 1 ]]</a>
+					</th:block>
+						
+					<a th:href="@{/pessoaPagina(page=${pessoas.number+1}, size=${pessoas.size}, nomePesquisa=${nomePesquisa}, pesquisaSexo=${pesquisaSexo})}"
+						data-placement="top" title="Próximo" rel="tooltip">
+						<span class="glyphicon glyphicon-chevron-right" th:if="${pessoas.hasNext()}"></span>
+					</a>
+				</div>
+			</div>
+					
+		</div>
+		
+		
+		<div class="modal fade" id="confirmacaoExclusaoModalPessoa" tabindex="-1" data-keyboard="false" data-backdrop="static">
+			<div class="modal-dialog">
+
+			<form th:attr="data-url-base=@{/excluirPessoa}">
+			
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Você tem certeza?</h4>
+					</div>
+					
+					<div class="modal-body">
+						<span>Você deseja mesmo excluir essa pessoa?</span>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+						<button type="submit" class="btn btn-primary">Excluir</button>
+					</div>
+					
+				</div>
+			</form>
+			</div>
+		</div>
+		
+	</div>
+
+
+<div th:replace="/templateSistema :: scriptBody"></div>
+
+<div th:replace="/templateSistema :: rodapePagina"></div>
+
+</body>
+</html>

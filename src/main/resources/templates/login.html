@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<title>Spring Framework - Login</title>
+
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"></meta>
+	<meta name="viewport" content="width=device-width"></meta>
+	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+<style>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+.aw-link-panel{
+	
+	float: right;
+	padding: 0px;
+}
+.navbar-brand{
+	
+	padding-top: 10px;
+	align-items: flex-end;
+}
+
+.panel-default{
+	
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.aw-titulo-panel{
+	
+	float: left;
+	padding-top: 2px;
+  }
+</style>
+
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+			</div>
+		</div>
+	</nav>
+	
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	<form action="" class="form-horizontal">
+		<label class="col-sm-offset-5 col-sm-20 control-label"></label>
+	</form>
+	
+	
+	<form class="form-horizontal col-sm-offset-4 col-sm-4" action="/login" method="post" onsubmit="return validarLogin() ? true : false;">
+
+		<div class="alert alert-danger" th:if="${!#strings.isEmpty(error)}">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span th:text="${error}">Usuário ou senha incorretos!</span>
+		</div>
+		
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="clearfix">
+					<h1 class="panel-title aw-titulo-panel">Inicie sua sessão</h1>
+					<a onclick="inserirAdmin()" class="btn btn-link aw-link-panel" rel="tooltip" data-placement="top" 
+						title="Entre com o usuário Administrador e crie um usuário após logar no sistema.">
+					<i class="glyphicon glyphicon-question-sign"></i></a>
+				</div>
+			</div>
+
+			<div class="panel-body">
+	
+				<div class="form-group">
+					<label for="username" class="col-sm-3 control-label">Login</label>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" id="username" name="username" autofocus="autofocus"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="password" class="col-sm-3 control-label">Senha</label>
+					<div class="col-sm-7">
+						<input type="password" class="form-control" id="password" name="password"/>
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-7">
+						<button type="submit" class="btn btn-primary btn-lg btn-block">Entrar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+   <div class="footer">
+      	<h5>Spring Framework © 2020 v 1.28 - 
+       		<a class="btn btn-link btn-xs" title="Viste meu portfólio" rel="tooltip" data-placement="top"
+       			onclick="window.open('https://portfoliojava.herokuapp.com')">portfoliojava.herokuapp.com
+       		</a>
+      	</h5>
+   </div>
+
+</body>
+
+<script type="text/javascript">
+$(function(){
+	
+	$('[rel="tooltip"]').tooltip();
+	
+});
+
+function validarLogin() {
+
+	if(document.getElementById("username").value == ''){
+		alert('Informe o Login!');
+		return false;	
+	}
+	else if(document.getElementById("password").value == ''){
+		alert('Informe a Senha!');
+		return false;
+	}
+	
+	return true;
+}
+
+function inserirAdmin() {
+	
+	$('#username').val('Administrador');
+	$('#password').val('adm12345');
+}
+</script>
+
+</html>

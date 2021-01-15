@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head th:fragment="titulo">
+	
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8"></meta>
+	<meta name="viewport" content="width=device-width"></meta>
+
+	<link rel="shortcut icon" th:href="@{/images/javaLogo.png}"></link>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"></link>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"></link>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-datepicker.standalone.min.css}"></link>
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+<body>
+
+<div th:fragment="barraBody">
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/springboot}" title="Início" rel="tooltip" data-placement="bottom">
+				<img th:src="@{/images/logo-inicio.png}"
+					width="30px" height="30px" />
+				</a>
+				<a class="navbar-brand" th:href="@{/listaPessoas}" rel="tooltip" data-placement="bottom" 
+				   title="Pesquisa de pessoas">
+					<label class="control-label">Pesquisar</label>
+				</a>
+				<a class="navbar-brand" th:href="@{/cadastroPessoa}" rel="tooltip" data-placement="bottom" 
+				   title="Cadastro de pessoas">
+					<label class="control-label">Cadastro</label>
+				</a>
+				<a class="navbar-brand" th:href="@{/novoUsuario}" rel="tooltip" data-placement="bottom" 
+				   title="Cadastro de usuários">
+					<label class="control-label">Cad. Usuário</label>
+				</a>
+				<a class="navbar-brand" th:href="@{/visualizarUsuario}" rel="tooltip" data-placement="bottom" 
+				   title="Manipulação de Usuários" sec:authorize="hasRole('ROLE_ADMIN')">
+					<label class="control-label">Permissões</label>
+				</a>
+				<a class="navbar-brand" th:href="@{/logout}" rel="tooltip" data-placement="bottom" 
+				   title="Fazer Logout">
+					<label class="control-label">Sair</label>
+				</a>
+			</div>
+			
+			<label th:text="'Bem vindo, ' + ${usuarioSessao}"
+					 style="color: white; font-size: 20px; padding-top: 10px; float: right;"></label>
+			
+		</div>
+	</nav>
+</div>
+
+
+<div th:fragment="mensagemErro">
+	<div class="alert alert-danger" th:if="${!#strings.isEmpty(msgErro)}">
+		<div th:each="detailedError : ${msgErro}">
+			<span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+			<span th:text="${detailedError}">Ops... Algo deu errado!!!</span>
+		</div>
+	</div>
+</div>
+
+
+<div th:fragment="scriptBody">
+	<script th:src="@{/js/jquery-2.1.4.min.js}"></script>
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.pt-BR.min.js}"></script>
+	<script th:src="@{/js/pessoa.js}"></script>
+	<script th:src="@{/js/telefone.js}"></script>
+	<script th:src="@{/js/consultaCep.js}"></script>
+	<script th:src="@{/js/usuario.js}"></script>
+	<script th:src="@{/js/envioEmail.js}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+</div>
+
+<div th:fragment="rodapePagina">
+	<footer class="footer-copyright text-center py-3">
+      	<h5>Spring Framework © 2020 v 1.28 - 
+       		<a class="btn btn-link btn-xs" title="Viste meu portfólio" rel="tooltip" data-placement="top"
+       			onclick="window.open('https://portfoliojava.herokuapp.com')">portfoliojava.herokuapp.com
+       		</a>
+      	</h5>
+   </footer>
+</div>
+
+
+</body>
+</html>

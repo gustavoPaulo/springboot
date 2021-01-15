@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.12.2.final using JasperReports Library version 6.12.2-75c5e90a222ab406e416cbf590a5397028a52de3  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PessoaModel" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5c6afd1d-e3de-433a-b101-e3bb0d570183">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="Colecao de Objetos Spring Boot"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cidade" class="java.lang.String">
+		<fieldDescription><![CDATA[cidade]]></fieldDescription>
+	</field>
+	<field name="bairro" class="java.lang.String">
+		<fieldDescription><![CDATA[bairro]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<field name="telefones" class="java.util.List">
+		<fieldDescription><![CDATA[telefones]]></fieldDescription>
+	</field>
+	<field name="cep" class="java.lang.String">
+		<fieldDescription><![CDATA[cep]]></fieldDescription>
+	</field>
+	<field name="idade" class="java.lang.Integer">
+		<fieldDescription><![CDATA[idade]]></fieldDescription>
+	</field>
+	<field name="senha" class="java.lang.String">
+		<fieldDescription><![CDATA[senha]]></fieldDescription>
+	</field>
+	<field name="uf" class="java.lang.String">
+		<fieldDescription><![CDATA[uf]]></fieldDescription>
+	</field>
+	<field name="logradouro" class="java.lang.String">
+		<fieldDescription><![CDATA[logradouro]]></fieldDescription>
+	</field>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="sexo" class="curso.springboot.model.SexoPessoa">
+		<fieldDescription><![CDATA[sexo]]></fieldDescription>
+	</field>
+	<field name="sobrenome" class="java.lang.String">
+		<fieldDescription><![CDATA[sobrenome]]></fieldDescription>
+	</field>
+	<field name="email" class="java.lang.String">
+		<fieldDescription><![CDATA[email]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="416a31bf-12cb-480d-88a3-f0a4ef1e4f16"/>
+				<staticText>
+					<reportElement x="20" y="20" width="410" height="43" forecolor="#FFFFFF" uuid="fce88a18-0d48-4eb6-a491-61b43c257606"/>
+					<textElement>
+						<font size="34" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Relatório de Pessoas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="395" y="69" width="180" height="20" forecolor="#FFFFFF" uuid="6e0e9025-dc8c-4b4c-9cb9-e1e1feaa0bb2"/>
+					<textElement textAlignment="Right">
+						<font size="14" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Resultado da pesquisa]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="47" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="17" width="50" height="30" uuid="90fd6c8b-aaeb-49c9-96d9-ba09b754492e">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="af3c4afa-9a6e-4bbb-90f8-d6d516aa5ede"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="70" y="17" width="70" height="30" uuid="881c714f-f405-47fa-b9f9-2d1ab773c592">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="017b1efa-8a3c-4e28-8f3f-30adf4a3f7fc"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="17" width="50" height="30" uuid="a4e99ca5-6542-40d4-8718-99ba6c00b211">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0093c258-45ea-45fa-9bdb-c4a17b267ee4"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Idade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="17" width="60" height="30" uuid="39fdee33-047c-42b9-ba43-1ea0b2294354">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1e45a3da-a224-4212-8ad1-1a1acd67695f"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Sexo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="16" width="110" height="30" uuid="518b2d82-da7e-4ac8-9497-3877533fe697">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c42bf7a1-55dd-4e23-a109-f5841e475cc7"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[E-mail]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="440" y="16" width="115" height="30" uuid="e1b6892b-30af-4368-80ad-26e9783f1b28">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8363b04-02bb-47ee-bf4a-3fca13041b19"/>
+				</reportElement>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Endereço]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="70" y="0" width="70" height="30" uuid="ca312ce8-0c21-4484-9470-984fd9f10197">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="017b1efa-8a3c-4e28-8f3f-30adf4a3f7fc"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="50" height="30" uuid="ad3f9108-4878-4a76-9b20-1b157e6c8b78">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="af3c4afa-9a6e-4bbb-90f8-d6d516aa5ede"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="160" y="0" width="50" height="30" uuid="bf487fce-a826-4162-8b60-73ae08d69789">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="0093c258-45ea-45fa-9bdb-c4a17b267ee4"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{idade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="0" width="60" height="30" uuid="add1d58c-1fd6-417e-982d-404091a07549">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="1e45a3da-a224-4212-8ad1-1a1acd67695f"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{sexo}.getDescricao()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="310" y="0" width="110" height="30" uuid="9f2e37ee-67ce-4d3e-94d2-61a260da68ac">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c42bf7a1-55dd-4e23-a109-f5841e475cc7"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{email}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="0" width="115" height="30" uuid="f147856c-4a3e-44a1-bcdd-972c69a0220b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b8363b04-02bb-47ee-bf4a-3fca13041b19"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{logradouro}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="58" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="28" width="555" height="30" uuid="6394cbe1-6095-47a6-85d3-9abb8c642e29"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Spring Framework © 2020 v 1.28 - portifoliojavawebgustavo.com"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
