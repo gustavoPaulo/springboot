@@ -9,4 +9,4 @@ Export-Package: curso.springboot,
  curso.springboot.repository,
  curso.springboot.service
 Automatic-Module-Name: springboot
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
